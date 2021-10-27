@@ -1,0 +1,1 @@
+# saleor-vue3-shop-integration
