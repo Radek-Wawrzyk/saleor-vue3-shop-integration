@@ -1,0 +1,87 @@
+.base-input {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0.5rem;
+    width: 0;
+    height: 1px;
+    background-color: $background-color;
+    will-change: width;
+    transition: all $time;
+  }
+
+  &--active {
+    &::before {
+      width: 80px;
+    }
+  }
+
+  &--error .base-input__label {
+    border-color: $error;
+    color: $error;
+  }
+
+  &--disabled {
+    pointer-events: none;
+    
+    label, input {
+      color: rgba(204, 204, 204, 0.438);
+    }
+  }
+
+  &__inner {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 0 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid $border-color;
+    background-color: $background-color;
+    transition: all $time;
+
+    &:focus {
+      border-color: $primary;
+      outline: none;
+    }
+
+    &--error {
+      border-color: $error;
+
+      &:focus {
+        border-color: $error;
+      }
+    }
+  }
+
+  &__label {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    transition: all $time--medium;
+    will-change: transform top left;
+    color: $text-color--accent;
+
+    &--is-focus {
+      top: 0rem;
+      left: 0.5rem;
+      transform: translateY(-50%) scale(0.7);
+      pointer-events: none;
+      color: $primary;
+    }
+  }
+
+  &__error {
+    position: absolute;
+    bottom: -1.25rem;
+    padding: 0.25rem 0.75rem 0 0.75rem;
+    color: $error;
+    font-size: 0.75rem;
+  }
+}

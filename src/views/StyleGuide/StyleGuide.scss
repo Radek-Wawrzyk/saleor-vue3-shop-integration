@@ -1,12 +1,12 @@
 .style-guide {
   position: relative;
-  background-color: #f6f6f6;
-
+  
   &__section {
     padding: 2rem 0;
+    background-color: #FFFFFF;
 
     &--accent {
-      background-color: #FFFFFF;
+      background-color: #f6f6f6;
 
       .style-guide__section-heading {
         color: #000000;
