@@ -12,16 +12,34 @@
     @focus="$emit('focus')"
     class="base-button"
   >
-    <slot></slot>
+    <span
+      class="base-button__inner"
+      :class="[
+        loading ? 'base-button__inner--is-loading' : false,
+      ]"
+    >
+      <slot></slot>
+    </span>
+
+    <transition name="fade">
+      <base-loader
+        v-if="loading"
+        class="base-button__loader"
+      />
+    </transition>
   </component>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue';
+import BaseLoader from '@/components/Base/BaseLoader/BaseLoader.vue';
 
 export default defineComponent({
   name: 'BaseButton',
   emits: ['click', 'focus'],
+  components: {
+    BaseLoader,
+  },
   props: {
     disabled: {
       type: Boolean as PropType<boolean>,
@@ -54,6 +72,11 @@ export default defineComponent({
       default: () => ('primary-dark'),
     },
     isActive: {
+      type: Boolean as PropType<boolean>,
+      required: false,
+      default: () => false,
+    },
+    loading: {
       type: Boolean as PropType<boolean>,
       required: false,
       default: () => false,
