@@ -1,7 +1,10 @@
 # saleor-pwa
 
-## Project description
+### Project description
 Our aim is to re-create nike shop based on the Saleor Ecommerce headless platform. The beggining architecture would be SPA based on the Vue.js and Typescript + PWA feature
+
+### UI/UX
+As we don't have custom UI prototype/layout, we would use nike.com as example. Therefore our main goal is to "reproduce" and improve Nike shop based on their live styles and logic.
 
 ### Git flow
 We use typical git flow, the production branch is `main`, develop is `staging`. For each hotfix/feature please create issue on the github project
