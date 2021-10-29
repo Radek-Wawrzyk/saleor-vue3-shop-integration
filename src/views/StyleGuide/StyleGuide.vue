@@ -47,13 +47,14 @@
             v-model="name"
             name="name"
             label="Name"
+            :error="nameError"
           />
 
           <base-input
             v-model="fullname"
             name="name"
             label="Error"
-            :error="fullname.length <= 0 ? 'The field is required' : null"
+            :error="fullnameError"
           />
 
           <base-input
@@ -79,6 +80,9 @@
 
 <script>
 import { ref } from 'vue';
+import { useField, useForm } from 'vee-validate';
+import * as yup from 'yup';
+
 import BaseButton from '@/components/Base/BaseButton/BaseButton.vue';
 import BaseInput from '@/components/Base/BaseInput/BaseInput.vue';
 
@@ -87,13 +91,23 @@ export default {
   components: { BaseButton, BaseInput },
   setup() {
     const isButtonLoading = ref(false);
-    const name = ref('');
-    const fullname = ref('');
+
+    const schema = yup.object({
+      name: yup.string().required().min(3),
+      fullname: yup.string().required().min(3),
+    });
+
+    useForm({ validationSchema: schema });
+
+    const { value: name, errorMessage: nameError } = useField('name');
+    const { value: fullname, errorMessage: fullnameError } = useField('fullname');
 
     return {
       isButtonLoading,
       name,
       fullname,
+      nameError,
+      fullnameError,
     };
   },
 };

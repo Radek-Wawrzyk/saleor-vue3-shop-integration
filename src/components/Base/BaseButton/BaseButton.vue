@@ -81,6 +81,11 @@ export default defineComponent({
       required: false,
       default: () => false,
     },
+    size: {
+      type: String as PropType<string>,
+      required: false,
+      default: () => ('medium'),
+    },
   },
   setup(props) {
     const componentType = computed(() => {
@@ -94,6 +99,9 @@ export default defineComponent({
         props.type === 'primary-light' ? 'base-button--primary-light' : false,
         props.disabled ? 'base-button--disabled' : false,
         props.isActive ? 'base-button--is-active' : false,
+        props.size === 'large' ? 'base-button--large' : false,
+        props.size === 'medium' ? 'base-button--medium' : false,
+        props.size === 'small' ? 'base-button--small' : false,
       ];
     });
 

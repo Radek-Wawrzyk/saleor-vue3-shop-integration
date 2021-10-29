@@ -11,6 +11,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'StyleGuide',
     component: () => import(/* webpackChunkName: "style-guide-page" */ '@/views/StyleGuide/StyleGuide.vue'),
   },
+  {
+    path: '/forms',
+    name: 'Forms',
+    component: () => import(/* webpackChunkName: "forms-page" */ '@/views/Forms/Forms.vue'),
+  },
 ];
 
 const router = createRouter({
