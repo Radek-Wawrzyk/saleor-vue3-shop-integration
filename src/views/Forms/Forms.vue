@@ -42,6 +42,20 @@
         </base-checkbox>
       </div>
 
+      <div class="forms-page__field forms-page__field--half forms-page__field--radios">
+        <base-radio-group
+          :options="radioOptions"
+          :error="genderError"
+          v-model="gender"
+          mode="horizontal"
+
+        />
+      </div>
+
+      <div class="forms-page__field forms-page__field--half">
+
+      </div>
+
       <base-button
         class="forms-page__submit"
         type="primary-dark"
@@ -63,15 +77,22 @@ import { ref, defineComponent } from 'vue';
 import BaseInput from '@/components/Base/BaseInput/BaseInput.vue';
 import BaseButton from '@/components/Base/BaseButton/BaseButton.vue';
 import BaseCheckbox from '@/components/Base/BaseCheckbox/BaseCheckbox.vue';
+import BaseRadioGroup from '@/components/Base/BaseRadioGroup/BaseRadioGroup.vue';
 
 export default defineComponent({
-  components: { BaseInput, BaseButton, BaseCheckbox },
+  components: {
+    BaseInput,
+    BaseButton,
+    BaseCheckbox,
+    BaseRadioGroup,
+  },
   setup() {
     const schema = yup.object({
       email: yup.string().required().email(),
       password: yup.string().required().min(8),
       agreement: yup.bool().oneOf([true], 'The terms and conditions must be accepted.'),
       kidney: yup.bool().oneOf([true], 'We need your kidney (if you die hehe).'),
+      gender: yup.string().oneOf(['male'], 'Sorry we accept only men'),
     });
 
     const formValues = {
@@ -79,7 +100,19 @@ export default defineComponent({
       password: '',
       agreement: false,
       kidney: false,
+      gender: 'male',
     };
+
+    const radioOptions = ref([
+      {
+        label: 'Male',
+        value: 'male',
+      },
+      {
+        label: 'Female',
+        value: 'female',
+      },
+    ]);
 
     const { meta, values, handleSubmit } = useForm({
       validationSchema: schema,
@@ -111,6 +144,7 @@ export default defineComponent({
     const { value: password, errorMessage: passwordError } = useField('password');
     const { value: agreement, errorMessage: agreementError } = useField('agreement');
     const { value: kidney, errorMessage: kidneyError } = useField('kidney');
+    const { value: gender, errorMessage: genderError } = useField('gender');
 
     return {
       email,
@@ -125,6 +159,9 @@ export default defineComponent({
       agreementError,
       kidney,
       kidneyError,
+      gender,
+      genderError,
+      radioOptions,
     };
   },
 });

@@ -8,6 +8,8 @@
   >
     <label
       :for="id"
+      :title="name"
+      :aria-label="name"
       class="base-checkbox__label"
     >
       <input

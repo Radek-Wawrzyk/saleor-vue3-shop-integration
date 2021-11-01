@@ -20,6 +20,12 @@
     &--half {
       width: 50%;
     }
+
+    &--radios {
+      & > div {
+        margin: 0 0 0.5rem 0;
+      }
+    }
   }
 
   &__submit {
