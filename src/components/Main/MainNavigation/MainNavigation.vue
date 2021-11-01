@@ -5,22 +5,13 @@
         class="list-item"
         v-for="link in megaMenu"
         :key="link.id"
-        @mouseenter="isActive = true"
-        @mouseleave="isActive = false"
+        @mouseenter="submenuActiveId(link.id)"
       >
         <h2 class="list-item--title">
           {{ link.name }}
         </h2>
-        <div
-          class="list-subcategory"
-          :class="{ active: isActive }"
-          v-if="true && link.subcategory"
-        >
-          <li
-            class="list-subcategory__item"
-            v-for="category in link.subcategory"
-            :key="category.id"
-          >
+        <div class="list-subcategory" :class="{ active: isActive }" v-if="true && link.subcategory">
+          <li class="list-subcategory__item" v-for="category in isSubmenu" :key="category.id">
             <ul>
               <h3 class="list-subcategory__item-title">{{ category.name }}</h3>
               <li class="list-subcategory__item-sub" v-for="item in category.list" :key="item.id">
@@ -41,8 +32,11 @@ import { megaMenu } from './megamenu';
 export default defineComponent({
   setup() {
     const isActive = ref(false);
+    const isSubmenu = ref([]);
     const submenuActiveId = (subMenuId: number) => {
-      megaMenu.find((elem) => console.log(elem));
+      const sub = megaMenu.find((elem) => subMenuId === elem.id);
+      const subCategory = sub?.subcategory;
+      isSubmenu.value.push(subCategory);
     };
     onMounted(() => {
       console.log();
@@ -50,8 +44,8 @@ export default defineComponent({
     return {
       megaMenu,
       submenuActiveId,
-      onMounted,
       isActive,
+      isSubmenu,
     };
   },
 });
