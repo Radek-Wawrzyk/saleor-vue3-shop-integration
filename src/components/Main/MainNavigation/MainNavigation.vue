@@ -1,23 +1,34 @@
 <template>
   <nav class="main-navigation">
     <ul class="list">
-      <li class="list-item" v-for="link in megaMenu" :key="link.id" @mouseover="showSubcategories">
-        {{ link.name }}
-
-        <ul class="list-subcategory">
+      <li
+        class="list-item"
+        v-for="link in megaMenu"
+        :key="link.id"
+        @mouseenter="isActive = true"
+        @mouseleave="isActive = false"
+      >
+        <h2 class="list-item--title">
+          {{ link.name }}
+        </h2>
+        <div
+          class="list-subcategory"
+          :class="{ active: isActive }"
+          v-if="true && link.subcategory"
+        >
           <li
             class="list-subcategory__item"
             v-for="category in link.subcategory"
             :key="category.id"
           >
-            <h3 class="list-subcategory__item-title">{{ category.name }}</h3>
             <ul>
-              <li class="list-subcategory__item-sub" v-for="item in category.list" :key="item">
+              <h3 class="list-subcategory__item-title">{{ category.name }}</h3>
+              <li class="list-subcategory__item-sub" v-for="item in category.list" :key="item.id">
                 {{ item.name }}
               </li>
             </ul>
           </li>
-        </ul>
+        </div>
       </li>
     </ul>
   </nav>
@@ -29,13 +40,19 @@ import { megaMenu } from './megamenu';
 
 export default defineComponent({
   setup() {
-    const showSubcategories = () => {
-      console.log('Menu was hovered');
+    const isActive = ref(false);
+    const submenuActiveId = (subMenuId: number) => {
+      megaMenu.find((elem) => console.log(elem));
     };
     onMounted(() => {
-      console.log(megaMenu);
+      console.log();
     });
-    return { megaMenu, showSubcategories, onMounted };
+    return {
+      megaMenu,
+      submenuActiveId,
+      onMounted,
+      isActive,
+    };
   },
 });
 </script>
