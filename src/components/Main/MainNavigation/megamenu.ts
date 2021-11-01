@@ -61,7 +61,7 @@ export const megaMenu = [
     subcategory: [
       {
         id: 1,
-        name: 'Polecane',
+        name: 'Polecane 2',
         list: [
           { name: '1', path: '/member-day' },
           { name: '1', path: '/' },
