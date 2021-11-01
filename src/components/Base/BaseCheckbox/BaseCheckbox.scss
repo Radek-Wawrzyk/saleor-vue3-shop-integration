@@ -14,6 +14,25 @@
     width: 100%;
     height: 100%;
     margin: 0;
+    z-index: 1;
+
+    &:focus, &:hover {
+      & ~ .base-checkbox__box .base-checkbox__box-circle {
+        box-shadow: $background-color--darker 0px 0px 0px 12px;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    &:checked {
+      & ~ .base-checkbox__box {
+        background-color: $primary;
+        border-color: $primary;
+
+        .base-checkbox__box-icon {
+          opacity: 1;
+        }
+      }
+    }
   }
 
   &__text {
@@ -26,20 +45,10 @@
 
   &__label {
     user-select: none;
-    cursor: pointer;
     display: flex;
     align-items: center;
     width: 100%;
     padding: 0.2rem 0;
-
-    &:hover {
-      .base-checkbox__box-circle {
-        opacity: 1;
-        background: rgb(245, 245, 245);
-        box-shadow: rgb(245, 245, 245) 0px 0px 0px 12px;
-        transition: all $time;
-      }
-    }
   }
   
   &__box {
@@ -61,40 +70,30 @@
       opacity: 0;
     }
 
-    &--focused {
-      .base-checkbox__box-circle {
-        opacity: 1;
-        background: rgb(245, 245, 245);
-        box-shadow: rgb(245, 245, 245) 0px 0px 0px 12px;
-        transition: all $time;
-      }
-    }
-
     &-circle {
       content: '';
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0);
       border-radius: 100%;
       width: 100%;
       height: 100%;
-      background-color: rgb(245, 245, 245);
-      box-shadow: rgb(245, 245, 245) 0px 0px 0px 12px;
-      opacity: 0;
+      background-color: $background-color--darker;
+      box-shadow: $background-color--darker 0 0 0 0;
       pointer-events: none;
       transition: all $time;
       z-index: -1;
     }
 
-    &--checked {
-      background-color: $primary;
-      border-color: $primary;
+    // &--checked {
+    //   background-color: $primary;
+    //   border-color: $primary;
 
-      .base-checkbox__box-icon {
-        opacity: 1;
-      }
-    }
+    //   .base-checkbox__box-icon {
+    //     opacity: 1;
+    //   }
+    // }
   }
 
   &__error {

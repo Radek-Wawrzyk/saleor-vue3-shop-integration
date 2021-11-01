@@ -25,13 +25,13 @@ module.exports = {
     'import/no-cycle': 0,
     'arrow-body-style': 0,
     'import/no-cycle': 0,
-    'arrow-body-style': 0,
     'radix': 0,
     'import/prefer-default-export': 0,
     'import/no-dynamic-require': 0,
     'global-require': 0,
     'prefer-spread': 0,
     'import/no-extraneous-dependencies': 0,
+    'max-length': 400,
   },
   overrides: [
     {

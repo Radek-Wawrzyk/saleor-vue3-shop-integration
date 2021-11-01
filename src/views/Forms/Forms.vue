@@ -1,10 +1,6 @@
 <template>
   <div class="forms-page">
     <form class="container forms-page__form" @submit.prevent="onSubmit">
-      <div class="forms-page__field forms-page__field--center">
-        {{ meta }}
-      </div>
-
       <div class="forms-page__field forms-page__field--half">
         <base-input
           v-model="email"

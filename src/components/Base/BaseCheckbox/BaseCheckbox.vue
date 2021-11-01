@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 <template>
   <div
     class="base-checkbox"
@@ -20,19 +21,12 @@
         :title="name"
         :aria-label="name"
         @change="$emit('update:modelValue', $event.target.checked)"
-        @focus="isFocused = true; $emit('focus')"
-        @focusout="isFocused = false"
+        @focus="$emit('focus')"
         type="checkbox"
         class="base-checkbox__inner"
       />
 
-      <span
-        class="base-checkbox__box"
-        :class="[
-          modelValue ? 'base-checkbox__box--checked' : false,
-          isFocused ? 'base-checkbox__box--focused': false,
-        ]"
-      >
+      <span class="base-checkbox__box">
         <span class="base-checkbox__box-circle" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -106,13 +100,6 @@ export default defineComponent({
       required: false,
       default: () => (false),
     },
-  },
-  setup() {
-    const isFocused = ref(false);
-
-    return {
-      isFocused,
-    };
   },
 });
 </script>
