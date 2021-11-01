@@ -1,13 +1,21 @@
+interface MegaMenuItem {
+  id: number,
+  name: string,
+  path: string,
+  subcategory?: MegaMenuItem[],
+}
+
 export const megaMenu = [
   {
     id: 1,
     name: 'Nowości',
+    path: '/',
     subcategory: [
       {
         id: 1,
         name: 'Polecane',
-        list: [
-          { name: 'Member days', path: '/member-day' },
+        subcategory: [
+          { name: 'Member days', path: '/member-day', id: 24 },
           { name: 'Przeglądaj wszystkie nowości', path: '/' },
           { name: 'Bestseellery', path: '/bestseeller' },
           { name: 'Kalendarz premier', path: '/premieres-calendar' },
@@ -16,7 +24,7 @@ export const megaMenu = [
       {
         id: 2,
         name: 'Nowości dla mężczyzn',
-        list: [
+        subcategory: [
           { name: 'Buty', path: '/shoes' },
           { name: 'Ubrania', path: '/cloths' },
           { name: 'Sprzęt', path: '/equipment' },
@@ -26,7 +34,7 @@ export const megaMenu = [
       {
         id: 3,
         name: 'Nowości dla kobiet',
-        list: [
+        subcategory: [
           { name: 'Buty', path: '/shoes' },
           { name: 'Ubrania', path: '/cloths' },
           { name: 'Sprzęt', path: '/equipment' },
@@ -36,7 +44,7 @@ export const megaMenu = [
       {
         id: 4,
         name: 'Nowości dla dzieci',
-        list: [
+        subcategory: [
           { name: 'Buty', path: '/shoes' },
           { name: 'Ubrania', path: '/cloths' },
           { name: 'Sprzęt', path: '/equipment' },
@@ -46,7 +54,7 @@ export const megaMenu = [
       {
         id: 5,
         name: 'Nowości dla kobiet',
-        list: [
+        subcategory: [
           { name: 'Buty', path: '/shoes' },
           { name: 'Ubrania', path: '/cloths' },
           { name: 'Sprzęt', path: '/equipment' },
@@ -62,7 +70,7 @@ export const megaMenu = [
       {
         id: 1,
         name: 'Polecane',
-        list: [
+        subcategory: [
           { name: '1', path: '/member-day' },
           { name: '1', path: '/' },
           { name: '1', path: '/bestseeller' },
@@ -72,7 +80,7 @@ export const megaMenu = [
       {
         id: 2,
         name: 'Nowości dla mężczyzn',
-        list: [
+        subcategory: [
           { name: 'Buty', path: '/shoes' },
           { name: 'Ubrania', path: '/cloths' },
           { name: 'Sprzęt', path: '/equipment' },
@@ -82,7 +90,7 @@ export const megaMenu = [
       {
         id: 3,
         name: 'Nowości dla kobiet',
-        list: [
+        subcategory: [
           { name: 'Buty', path: '/shoes' },
           { name: 'Ubrania', path: '/cloths' },
           { name: 'Sprzęt', path: '/equipment' },
@@ -92,7 +100,7 @@ export const megaMenu = [
       {
         id: 4,
         name: 'Nowości dla dzieci',
-        list: [
+        subcategory: [
           { name: 'Buty', path: '/shoes' },
           { name: 'Ubrania', path: '/cloths' },
           { name: 'Sprzęt', path: '/equipment' },
@@ -102,7 +110,7 @@ export const megaMenu = [
       {
         id: 5,
         name: 'Nowości dla kobiet',
-        list: [
+        subcategory: [
           { name: 'Buty', path: '/shoes' },
           { name: 'Ubrania', path: '/cloths' },
           { name: 'Sprzęt', path: '/equipment' },
@@ -126,10 +134,4 @@ export const megaMenu = [
     name: 'Wyprzedaż',
     subcategory: [],
   },
-] as const;
-
-interface Menu {
-  id: number;
-  name: string;
-  subcategory: any[];
-}
+] as MegaMenuItem[];
