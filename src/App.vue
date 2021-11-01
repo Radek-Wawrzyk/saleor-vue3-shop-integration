@@ -1,7 +1,14 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/products">Products</router-link>
-  </div>
-  <router-view/>
+  <main-navigation/>
+  <router-view />
 </template>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import MainNavigation from '@/components/Main/MainNavigation/MainNavigation.vue';
+
+export default defineComponent({
+  components: {
+    MainNavigation,
+  },
+});
+</script>
