@@ -7,11 +7,6 @@
     ]"
     ref="selectRef"
   >
-
-    <input
-      :value="modelValue"
-
-    />
     <button
       class="base-select__inner"
       @click="setSelect()"
