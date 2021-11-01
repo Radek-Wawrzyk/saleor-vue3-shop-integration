@@ -49,7 +49,12 @@
       </div>
 
       <div class="forms-page__field forms-page__field--half">
-
+        <base-select
+          label="Country"
+          v-model="country"
+          :options="selectOptions"
+          :error="countryError"
+        />
       </div>
 
       <base-button
@@ -62,15 +67,6 @@
         Submit
       </base-button>
     </form>
-
-    <div style="height: 1000px"></div>
-
-    <base-image
-      src="https://images.nike.com/is/image/DotCom/DM0088_100?$NIKE_PWP_GRAY$&wid=420&hei=420"
-      alt="xd"
-      lazy
-      :loadOnce="false"
-    />
   </div>
 </template>
 
@@ -84,6 +80,7 @@ import BaseButton from '@/components/Base/BaseButton/BaseButton.vue';
 import BaseCheckbox from '@/components/Base/BaseCheckbox/BaseCheckbox.vue';
 import BaseRadioGroup from '@/components/Base/BaseRadioGroup/BaseRadioGroup.vue';
 import BaseImage from '@/components/Base/BaseImage/BaseImage.vue';
+import BaseSelect from '@/components/Base/BaseSelect/BaseSelect.vue';
 
 export default defineComponent({
   components: {
@@ -92,6 +89,7 @@ export default defineComponent({
     BaseCheckbox,
     BaseRadioGroup,
     BaseImage,
+    BaseSelect,
   },
   setup() {
     const schema = yup.object({
@@ -100,6 +98,7 @@ export default defineComponent({
       agreement: yup.bool().oneOf([true], 'The terms and conditions must be accepted.'),
       kidney: yup.bool().oneOf([true], 'We need your kidney (if you die hehe).'),
       gender: yup.string().oneOf(['male'], 'Sorry we accept only men'),
+      country: yup.string().required().oneOf(['poland'], 'Sorry we accepnt only polish people'),
     });
 
     const formValues = {
@@ -108,6 +107,7 @@ export default defineComponent({
       agreement: false,
       kidney: false,
       gender: 'male',
+      country: 'uk',
     };
 
     const radioOptions = ref([
@@ -118,6 +118,25 @@ export default defineComponent({
       {
         label: 'Female',
         value: 'female',
+      },
+    ]);
+
+    const selectOptions = ref([
+      {
+        label: 'Poland',
+        value: 'poland',
+      },
+      {
+        label: 'Germany',
+        value: 'germany',
+      },
+      {
+        label: 'UK',
+        value: 'uk',
+      },
+      {
+        label: 'USA',
+        value: 'usa',
       },
     ]);
 
@@ -152,6 +171,7 @@ export default defineComponent({
     const { value: agreement, errorMessage: agreementError } = useField('agreement');
     const { value: kidney, errorMessage: kidneyError } = useField('kidney');
     const { value: gender, errorMessage: genderError } = useField('gender');
+    const { value: country, errorMessage: countryError } = useField('country');
 
     return {
       email,
@@ -169,6 +189,9 @@ export default defineComponent({
       gender,
       genderError,
       radioOptions,
+      selectOptions,
+      country,
+      countryError,
     };
   },
 });

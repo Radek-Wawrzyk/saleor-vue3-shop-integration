@@ -85,15 +85,6 @@
       transition: all $time;
       z-index: -1;
     }
-
-    // &--checked {
-    //   background-color: $primary;
-    //   border-color: $primary;
-
-    //   .base-checkbox__box-icon {
-    //     opacity: 1;
-    //   }
-    // }
   }
 
   &__error {
