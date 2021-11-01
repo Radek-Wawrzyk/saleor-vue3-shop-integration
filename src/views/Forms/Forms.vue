@@ -62,6 +62,15 @@
         Submit
       </base-button>
     </form>
+
+    <div style="height: 1000px"></div>
+
+    <base-image
+      src="https://images.nike.com/is/image/DotCom/DM0088_100?$NIKE_PWP_GRAY$&wid=420&hei=420"
+      alt="xd"
+      lazy
+      :loadOnce="false"
+    />
   </div>
 </template>
 
@@ -74,6 +83,7 @@ import BaseInput from '@/components/Base/BaseInput/BaseInput.vue';
 import BaseButton from '@/components/Base/BaseButton/BaseButton.vue';
 import BaseCheckbox from '@/components/Base/BaseCheckbox/BaseCheckbox.vue';
 import BaseRadioGroup from '@/components/Base/BaseRadioGroup/BaseRadioGroup.vue';
+import BaseImage from '@/components/Base/BaseImage/BaseImage.vue';
 
 export default defineComponent({
   components: {
@@ -81,6 +91,7 @@ export default defineComponent({
     BaseButton,
     BaseCheckbox,
     BaseRadioGroup,
+    BaseImage,
   },
   setup() {
     const schema = yup.object({
