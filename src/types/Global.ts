@@ -1,7 +1,5 @@
 interface AppConfig {
-  apiURL: string,
+  apiURL: string;
 }
 
-export {
-  AppConfig,
-};
+export { AppConfig };

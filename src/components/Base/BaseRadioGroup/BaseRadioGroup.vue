@@ -1,9 +1,7 @@
 <template>
   <div
     class="base-radio-group"
-    :class="[
-      mode === 'vertical' ? 'base-radio-group--vertical' : 'base-radio-group--horizontal',
-    ]"
+    :class="[mode === 'vertical' ? 'base-radio-group--vertical' : 'base-radio-group--horizontal']"
   >
     <base-radio
       v-for="option in options"
@@ -18,11 +16,7 @@
     </base-radio>
 
     <transition name="fade">
-      <div
-        class="base-radio-group__error"
-        aria-label="error"
-        v-if="error"
-      >
+      <div class="base-radio-group__error" aria-label="error" v-if="error">
         {{ error }}
       </div>
     </transition>
@@ -42,22 +36,22 @@ export default defineComponent({
     error: {
       type: String as PropType<string>,
       required: false,
-      default: () => (null),
+      default: () => null,
     },
     name: {
       type: String as PropType<string>,
       required: false,
-      default: () => (''),
+      default: () => '',
     },
     modelValue: {
-      type: [Boolean, String, Number] as PropType<boolean|string|number>,
+      type: [Boolean, String, Number] as PropType<boolean | string | number>,
       required: false,
       default: () => false,
     },
     mode: {
       type: String as PropType<string>,
       required: false,
-      default: () => ('vertical'),
+      default: () => 'vertical',
     },
     options: {
       type: Array as PropType<RadioOption[]>,

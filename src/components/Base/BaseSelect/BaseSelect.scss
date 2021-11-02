@@ -82,7 +82,9 @@
       transition: all $time;
       cursor: pointer;
 
-      &:hover, &:focus, &--is-selected {
+      &:hover,
+      &:focus,
+      &--is-selected {
         background-color: $background-color--darker;
       }
 

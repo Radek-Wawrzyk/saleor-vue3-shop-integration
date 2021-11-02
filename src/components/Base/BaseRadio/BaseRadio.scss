@@ -28,13 +28,13 @@
     margin: 0;
     z-index: 1;
 
-    &:focus, &:hover {
+    &:focus,
+    &:hover {
       & ~ .base-radio__box .base-radio__box-background {
         opacity: 1;
         box-shadow: $background-color--darker 0px 0px 0px 12px;
       }
     }
-
   }
 
   &__box {

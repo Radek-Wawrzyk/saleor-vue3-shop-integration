@@ -4,14 +4,12 @@
     :class="[
       isFocused || modelValue ? 'base-input--active' : false,
       error ? 'base-input--error' : false,
-      disabled ? 'base-input--disabled': false,
+      disabled ? 'base-input--disabled' : false,
     ]"
   >
     <label
       class="base-input__label"
-      :class="[
-        isFocused || modelValue ? 'base-input__label--is-focus' : false,
-      ]"
+      :class="[isFocused || modelValue ? 'base-input__label--is-focus' : false]"
       :for="id"
       v-if="label"
     >
@@ -23,23 +21,20 @@
       :type="type"
       :id="id"
       :name="name"
-      :class="[
-        !!error ? 'base-input__inner--error' : false,
-      ]"
+      :class="[!!error ? 'base-input__inner--error' : false]"
       :title="name"
       :aria-label="name"
       @input="$emit('update:modelValue', $event.target.value)"
-      @focus="isFocused = true; $emit('focus')"
+      @focus="
+        isFocused = true;
+        $emit('focus');
+      "
       @focusout="isFocused = false"
       class="base-input__inner"
     />
 
     <transition name="fade">
-      <div
-        class="base-input__error"
-        aria-label="error"
-        v-if="error"
-      >
+      <div class="base-input__error" aria-label="error" v-if="error">
         {{ error }}
       </div>
     </transition>
@@ -57,37 +52,37 @@ export default defineComponent({
     error: {
       type: String as PropType<string>,
       required: false,
-      default: () => (null),
+      default: () => null,
     },
     label: {
       type: String as PropType<string>,
       required: false,
-      default: () => (null),
+      default: () => null,
     },
     id: {
       type: String as PropType<string>,
       required: false,
-      default: () => (uuid()),
+      default: () => uuid(),
     },
     name: {
       type: String as PropType<string>,
       required: false,
-      default: () => (''),
+      default: () => '',
     },
     modelValue: {
-      type: [String, Number] as PropType<string|number>,
+      type: [String, Number] as PropType<string | number>,
       required: false,
-      default: () => (''),
+      default: () => '',
     },
     type: {
       type: String as PropType<string>,
       required: false,
-      default: () => ('text'),
+      default: () => 'text',
     },
     disabled: {
       type: Boolean as PropType<boolean>,
       required: false,
-      default: () => (false),
+      default: () => false,
     },
   },
   setup() {

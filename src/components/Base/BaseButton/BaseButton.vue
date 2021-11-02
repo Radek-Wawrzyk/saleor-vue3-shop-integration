@@ -12,20 +12,12 @@
     @focus="$emit('focus')"
     class="base-button"
   >
-    <span
-      class="base-button__inner"
-      :class="[
-        loading ? 'base-button__inner--is-loading' : false,
-      ]"
-    >
+    <span class="base-button__inner" :class="[loading ? 'base-button__inner--is-loading' : false]">
       <slot></slot>
     </span>
 
     <transition name="fade">
-      <base-loader
-        v-if="loading"
-        class="base-button__loader"
-      />
+      <base-loader v-if="loading" class="base-button__loader" />
     </transition>
   </component>
 </template>
@@ -49,17 +41,17 @@ export default defineComponent({
     title: {
       type: String as PropType<string>,
       required: false,
-      default: () => (''),
+      default: () => '',
     },
     to: {
       type: String as PropType<string>,
       required: false,
-      default: () => (''),
+      default: () => '',
     },
     nativeType: {
       type: String as PropType<string>,
       required: false,
-      default: () => ('button'),
+      default: () => 'button',
     },
     nativeLink: {
       type: Boolean as PropType<boolean>,
@@ -69,7 +61,7 @@ export default defineComponent({
     type: {
       type: String as PropType<string>,
       required: false,
-      default: () => ('primary-dark'),
+      default: () => 'primary-dark',
     },
     isActive: {
       type: Boolean as PropType<boolean>,
@@ -84,7 +76,7 @@ export default defineComponent({
     size: {
       type: String as PropType<string>,
       required: false,
-      default: () => ('medium'),
+      default: () => 'medium',
     },
   },
   setup(props) {
@@ -93,8 +85,7 @@ export default defineComponent({
       if (props.to && !props.nativeType) return 'router-link';
       return 'button';
     });
-    const buttonCssClasses = computed(() => {
-      return [
+    const buttonCssClasses = computed(() => [
         props.type === 'primary-dark' ? 'base-button--primary-dark' : false,
         props.type === 'primary-light' ? 'base-button--primary-light' : false,
         props.disabled ? 'base-button--disabled' : false,
@@ -102,8 +93,7 @@ export default defineComponent({
         props.size === 'large' ? 'base-button--large' : false,
         props.size === 'medium' ? 'base-button--medium' : false,
         props.size === 'small' ? 'base-button--small' : false,
-      ];
-    });
+      ]);
 
     return {
       componentType,

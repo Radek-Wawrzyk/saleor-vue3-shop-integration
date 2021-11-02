@@ -13,4 +13,6 @@ createApp({
     provide(DefaultApolloClient, apolloClient);
   },
   render: () => h(App),
-}).use(router).mount('#app');
+})
+  .use(router)
+  .mount('#app');

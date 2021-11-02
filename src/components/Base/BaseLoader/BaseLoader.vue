@@ -23,12 +23,12 @@ export default defineComponent({
     strokeColor: {
       type: String as PropType<string>,
       required: false,
-      default: () => ('#FFF'),
+      default: () => '#FFF',
     },
     strokeWidth: {
       type: Number as PropType<number>,
       required: false,
-      default: () => (2),
+      default: () => 2,
     },
   },
 });
