@@ -69,3 +69,8 @@ yarn test:e2e
 ```
 yarn lint
 ```
+
+### Format files with Prettier
+```
+yarn format
+```
