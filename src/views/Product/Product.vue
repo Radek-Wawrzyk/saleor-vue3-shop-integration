@@ -1,6 +1,21 @@
 <template>
   <div class="page product-page" v-if="!loading && product">
-    {{ product }}
+    <div class="product-page__container container">
+      <section class="product-page__content">
+        <product-gallery
+          :images="productImages"
+          class="product-page__content-gallery"
+        />
+
+        <div class="product-page__content-details">
+          ToDo - Content component here
+        </div>
+      </section>
+
+      <section class="product-page__bottom">
+
+      </section>
+    </div>
   </div>
 </template>
 
@@ -10,8 +25,11 @@ import { useRoute } from 'vue-router';
 import { getSingleProduct } from '@/graphql/queries/product';
 import { useQuery, useResult } from '@vue/apollo-composable';
 
+import ProductGallery from '@/components/Product/ProductGallery/ProductGallery.vue';
+
 export default defineComponent({
   name: 'ProductPage',
+  components: { ProductGallery },
   setup() {
     const route = useRoute();
     const slug = computed(() => route.params.slug);

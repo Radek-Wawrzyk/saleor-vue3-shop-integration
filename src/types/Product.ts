@@ -1,4 +1,4 @@
-interface ProductImage {
+declare interface ProductImage {
   __typename: string,
   alt: string,
   id: string,
@@ -6,18 +6,18 @@ interface ProductImage {
   url: string,
 }
 
-interface ProductVariant {
+declare interface ProductVariant {
   __typename: string,
   id: string,
   name: string,
   images: ProductImage[],
 }
 
-interface ProductPrice {
+declare interface ProductPrice {
   amount: number,
 }
 
-interface ProductPricing {
+declare interface ProductPricing {
   onSale: boolean,
   priceRange: {
     start: {
@@ -31,7 +31,7 @@ interface ProductPricing {
   }
 }
 
-interface Product {
+declare interface Product {
   description: string,
   descriptionJson: string,
   isAvailable: boolean,

@@ -5,7 +5,7 @@
         isLoaded ? 'base-image--loaded' : false,
       ]"
       :data-src="src"
-      :src="lazy && loadedSrc ? loadedSrc : null"
+      :src="lazy && loadedSrc ? loadedSrc : src"
       :alt="lazy && isLoaded ? alt : null"
       :key="isLoaded"
       ref="imageRef"

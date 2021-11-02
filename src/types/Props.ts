@@ -1,14 +1,14 @@
-interface RadioOption {
+declare interface RadioOption {
   value: number|string|boolean,
   label: string,
 };
 
-interface IntersectionOption {
+declare interface IntersectionOption {
   root: HTMLElement,
   rootMargin: string|undefined,
 };
 
-interface SelectOption {
+declare interface SelectOption {
   value: number|string|boolean,
   label: string,
 };

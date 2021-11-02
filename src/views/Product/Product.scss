@@ -1,0 +1,43 @@
+.product-page {
+  position: relative;
+
+  &__content {
+    position: relative;
+    margin: 0 0 4rem 0;
+    display: flex;
+    align-items: flex-start;
+
+    &-details {
+      width: 456px;
+      padding: 0 0 0 4rem;
+      position: sticky;
+      top: 1rem;
+    }
+
+    &-gallery {
+      width: calc(100% - 456px);
+    }
+  }
+}
+
+// Media
+
+@media screen and (max-width: 1024px) {
+  .product-page {
+    &__content {
+      flex-wrap: wrap;
+
+      &-details, &-gallery {
+        width: 100%;
+      }
+
+      &-gallery {
+        margin: 0 0 2rem 0;
+      }
+
+      &-details {
+        padding: 0;
+      }
+    }
+  }
+}

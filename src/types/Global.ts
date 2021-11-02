@@ -1,4 +1,4 @@
-interface AppConfig {
+declare interface AppConfig {
   apiURL: string,
 }
 
