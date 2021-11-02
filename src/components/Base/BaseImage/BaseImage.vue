@@ -45,16 +45,16 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const imageRef:any|HTMLElement = ref(null);
-    const isLoaded = ref(false);
-    const loadedSrc = ref(null);
+    const imageRef = ref<HTMLImageElement>();
+    const isLoaded = ref<boolean>(false);
+    const loadedSrc = ref<string | null>(null);
 
-    const imageObserver = (entries:any, observer:any) => {
+    const imageObserver = (entries:IntersectionObserverEntry[], observer:IntersectionObserver) => {
       const entry = entries[0];
 
-      if (entry?.isIntersecting) {
+      if (entry.isIntersecting) {
         isLoaded.value = true;
-        loadedSrc.value = entry?.target?.dataset?.src;
+        loadedSrc.value = entry.target.getAttribute('data-src');
         observer.unobserve(entry?.target);
       }
     };
@@ -62,8 +62,8 @@ export default defineComponent({
     const observer = new IntersectionObserver(imageObserver, props.options);
 
     onMounted(() => {
-      if (props.lazy && imageRef?.value) {
-        observer.observe(imageRef?.value);
+      if (props.lazy && imageRef.value) {
+        observer.observe(imageRef.value);
       }
     });
 

@@ -114,14 +114,14 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const isActive = ref(false);
-    const selectRef = ref();
+    const isActive = ref<boolean>(false);
+    const selectRef = ref<HTMLDivElement>();
     const selectText = computed(() => {
       const selected = props.options.find((option) => option.value === props.modelValue);
       return selected ? selected.label : props.label;
     });
 
-    const setSelect = (status:boolean = !isActive.value) => {
+    const setSelect = (status = !isActive.value) => {
       isActive.value = status;
     };
     const isSelected = (option:SelectOption) => {
@@ -133,7 +133,7 @@ export default defineComponent({
     }
 
     const handleOutsideClick = (event:Event) => {
-      if (!selectRef?.value?.contains(event.target)) {
+      if (!selectRef?.value?.contains(event.target as Node)) {
         setSelect(false);
       }
     };
