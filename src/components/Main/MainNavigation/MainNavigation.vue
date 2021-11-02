@@ -1,64 +1,97 @@
 <template>
-  <nav class="main-navigation">
-    <ul class="main-navigation__list">
-      <li
-        class="main-navigation__list-item"
-        v-for="item in megaMenu"
-        :key="item.id"
-        @mouseenter="submenuActiveId(item.id)"
+  <nav class="main-navigation" @mouseleave="hideMenu()">
+    <div class="container">
+      <ul class="main-navigation__menu">
+        <li
+          class="main-navigation__menu-item"
+          v-for="link in megaMenu"
+          :key="link.id"
+          @mouseenter="showMenu(link)"
+        >
+          <router-link
+            to="/"
+            :title="link.name"
+            :aria-label="link.name"
+            class="main-navigation__menu-link"
+          >
+            {{ link.name }}
+          </router-link>
+        </li>
+      </ul>
+    </div>
+
+    <transition name="fade" mode="out-in">
+      <nav
+        class="main-navigation-bottom"
+        v-if="subMenu && subMenu.length && isActive"
+        :key="Math.random()"
       >
-        <h2 class="main-navigation__list-item-title">
-          {{ item.name }}
-        </h2>
-        <div class="main-navigation-subcategory" :class="{ active: isActive }" v-if="true && item.subcategory">
-          <li class="main-navigation-subcategory__item" v-for="category in isSubmenu" :key="category.id">
-            <ul>
-              <h3 class="main-navigation-subcategory__item-title">{{ category.name }}</h3>
-              <li class="main-navigation-subcategory__item-sub" v-for="item in category.list" :key="item.id">
-                {{ item.name }}
-              </li>
-            </ul>
-          </li>
+        <div
+          class="main-navigation-bottom__menu"
+          v-for="category in subMenu"
+          :key="category.id"
+        >
+          <p class="main-navigation-bottom__menu-heading">
+            {{ category.name }}
+          </p>
+
+          <ul class="main-navigation-bottom__list">
+            <li
+              class="main-navigation-bottom__menu-item"
+              v-for="subCategory in category.subcategory"
+              :key="subCategory.name"
+            >
+              {{ subCategory.name }}
+            </li>
+          </ul>
         </div>
-      </li>
-    </ul>
+
+        <ul class="main-navigation-bottom__menu">
+          <li
+            class="main-navigation-bottom__menu-item"
+            v-for="category in subMenu"
+            :key="category.id"
+          >
+            {{ category.name }}
+          </li>
+        </ul>
+      </nav>
+    </transition>
   </nav>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, onMounted } from 'vue';
+import { ref, defineComponent } from 'vue';
 import { megaMenu } from './megamenu';
+
+interface MegaMenuItem {
+  id: number,
+  name: string,
+  path: string,
+  subcategory?: MegaMenuItem[],
+}
 
 export default defineComponent({
   setup() {
     const isActive = ref(false);
+    const subMenu = ref<MegaMenuItem[]>([]);
 
-    interface List {
-      name: string;
-      path: string;
-    }
-    interface Subcategories {
-      id: number;
-      name: string;
-      list: Array<List>;
-    }
-
-    const isSubmenu = ref<Array<Subcategories>>([]);
-
-    const submenuActiveId = (subMenuId: number) => {
-      const sub = megaMenu.find((elem) => subMenuId === elem.id);
-      const subCategory = sub?.subcategory;
-
-    //   isSubmenu.value.push(subCategory);
+    const showMenu = (category:MegaMenuItem) => {
+      subMenu.value = category.subcategory;
+      isActive.value = true;
     };
-    onMounted(() => {
-      console.log();
-    });
+
+    const hideMenu = () => {
+      subMenu.value = [];
+      isActive.value = false;
+    };
+
     return {
       megaMenu,
-      submenuActiveId,
+      hideMenu,
+      showMenu,
       isActive,
-      isSubmenu,
+      subMenu,
     };
   },
 });
