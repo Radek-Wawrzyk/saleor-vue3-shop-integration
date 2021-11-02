@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const getProducts = gql`
+const getProducts = gql`
   query getProducts ($first: Int) {
     products(first: $first) {
       edges {
@@ -13,3 +13,60 @@ export const getProducts = gql`
     }
   }
 `;
+
+const getSingleProduct = gql`
+  query getSingleProduct ($slug: String) {
+    product(slug: $slug) {
+      description,
+      descriptionJson,
+      isAvailable
+      defaultVariant {
+        id
+      },
+      pricing {
+        onSale,
+        priceRange {
+          start {
+            net {
+              amount
+            }
+            gross {
+              amount
+            }
+          }
+          stop {
+            net {
+              amount
+            }
+            gross {
+              amount
+            }
+          }
+        }
+      }
+      variants {
+        id,
+        name
+        images {
+          url,
+          id,
+          alt,
+          sortOrder
+        }
+      }
+      name,
+      id,
+      images {
+        url,
+        alt,
+        id,
+        sortOrder
+      }
+    }
+  }
+`;
+
+export {
+  getSingleProduct,
+  getProducts
+};
