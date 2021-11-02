@@ -7,13 +7,17 @@
           class="product-page__content-gallery"
         />
 
-        <div class="product-page__content-details">
-          ToDo - Content component here
-        </div>
+        <product-details
+          :product-name="productName"
+          :product-description="productDescription"
+          :product-price="productPrice"
+          :product-variants="productVariants"
+          class="product-page__content-details"
+        />
       </section>
 
       <section class="product-page__bottom">
-
+        ToDo -> CMS sections here
       </section>
     </div>
   </div>
@@ -26,10 +30,11 @@ import { getSingleProduct } from '@/graphql/queries/product';
 import { useQuery, useResult } from '@vue/apollo-composable';
 
 import ProductGallery from '@/components/Product/ProductGallery/ProductGallery.vue';
+import ProductDetails from '@/components/Product/ProductDetails/ProductDetails.vue';
 
 export default defineComponent({
   name: 'ProductPage',
-  components: { ProductGallery },
+  components: { ProductGallery, ProductDetails },
   setup() {
     const route = useRoute();
     const slug = computed(() => route.params.slug);
