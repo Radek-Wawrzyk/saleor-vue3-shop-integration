@@ -1,0 +1,30 @@
+.base-radio-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+  &--horizontal {
+    flex-direction: row;
+
+    .base-radio-group__item {
+      margin: 0 1rem 0 0;
+    }
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &__item {
+    margin: 0 0 0.5rem 0;
+  }
+
+  &__error {
+    position: absolute;
+    bottom: -1rem;
+    color: $error;
+    font-size: 0.75rem;
+    width: 100%;
+    padding: 0.25rem 0 0 2rem;
+  }
+}
