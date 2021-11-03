@@ -1,9 +1,7 @@
 <template>
   <transition name="fade" mode="out-in">
     <img
-      :class="[
-        isLoaded ? 'base-image--loaded' : false,
-      ]"
+      :class="[isLoaded ? 'base-image--loaded' : false]"
       :data-src="src"
       :src="lazy && loadedSrc ? loadedSrc : null"
       :alt="lazy && isLoaded ? alt : null"
@@ -23,20 +21,20 @@ export default defineComponent({
     src: {
       type: String as PropType<string>,
       required: false,
-      default: () => (''),
+      default: () => '',
     },
     alt: {
       type: String as PropType<string>,
       required: false,
-      default: () => (''),
+      default: () => '',
     },
     lazy: {
       type: Boolean as PropType<boolean>,
       required: false,
-      default: () => (false),
+      default: () => false,
     },
     options: {
-      type: Object as PropType<object>,
+      type: Object as PropType<IntersectionObserverInit>,
       required: false,
       default: () => ({
         root: document,
@@ -49,7 +47,10 @@ export default defineComponent({
     const isLoaded = ref<boolean>(false);
     const loadedSrc = ref<string | null>(null);
 
-    const imageObserver = (entries:IntersectionObserverEntry[], observer:IntersectionObserver) => {
+    const imageObserver = (
+      entries: IntersectionObserverEntry[],
+      observer: IntersectionObserver,
+    ) => {
       const entry = entries[0];
 
       if (entry.isIntersecting) {
@@ -72,6 +73,6 @@ export default defineComponent({
       loadedSrc,
       isLoaded,
     };
-  }
+  },
 });
 </script>

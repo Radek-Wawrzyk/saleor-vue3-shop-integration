@@ -9,7 +9,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/style-guide',
     name: 'StyleGuide',
-    component: () => import(/* webpackChunkName: "style-guide-page" */ '@/views/StyleGuide/StyleGuide.vue'),
+    component: () =>
+      import(/* webpackChunkName: "style-guide-page" */ '@/views/StyleGuide/StyleGuide.vue'),
   },
   {
     path: '/forms',

@@ -1,17 +1,9 @@
 <template>
   <div
     class="base-radio"
-    :class="[
-      error ? 'base-radio--error' : false,
-      disabled ? 'base-radio--disabled': false,
-    ]"
+    :class="[error ? 'base-radio--error' : false, disabled ? 'base-radio--disabled' : false]"
   >
-    <label
-      :for="id"
-      :title="name"
-      :aria-label="name"
-      class="base-radio__label"
-    >
+    <label :for="id" :title="name" :aria-label="name" class="base-radio__label">
       <input
         :checked="isChecked"
         :value="value"
@@ -25,12 +17,7 @@
         class="base-radio__inner"
       />
 
-      <div
-        class="base-radio__box"
-        :class="[
-          isChecked ? 'base-radio__box--checked' : false,
-        ]"
-      >
+      <div class="base-radio__box" :class="[isChecked ? 'base-radio__box--checked' : false]">
         <span class="base-radio__box-background" />
         <span class="base-radio__box-inner-circle" />
       </div>
@@ -53,32 +40,32 @@ export default defineComponent({
     error: {
       type: String as PropType<string>,
       required: false,
-      default: () => (null),
+      default: () => null,
     },
     id: {
       type: String as PropType<string>,
       required: false,
-      default: () => (uuid()),
+      default: () => uuid(),
     },
     name: {
       type: String as PropType<string>,
       required: false,
-      default: () => (''),
+      default: () => '',
     },
     modelValue: {
-      type: [Boolean, String, Number] as PropType<boolean|string|number>,
+      type: [Boolean, String, Number] as PropType<boolean | string | number>,
       required: false,
       default: () => false,
     },
     value: {
-      type: [Boolean, String, Number] as PropType<boolean|string|number>,
+      type: [Boolean, String, Number] as PropType<boolean | string | number>,
       required: false,
       default: () => false,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
       required: false,
-      default: () => (false),
+      default: () => false,
     },
   },
   setup(props) {

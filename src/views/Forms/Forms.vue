@@ -2,38 +2,21 @@
   <div class="forms-page">
     <form class="container forms-page__form" @submit.prevent="onSubmit">
       <div class="forms-page__field forms-page__field--half">
-        <base-input
-          v-model="email"
-          :error="emailError"
-          label="Email"
-        />
+        <base-input v-model="email" :error="emailError" label="Email" />
       </div>
 
       <div class="forms-page__field forms-page__field--half">
-        <base-input
-          v-model="password"
-          :error="passwordError"
-          label="Password"
-          type="password"
-        />
+        <base-input v-model="password" :error="passwordError" label="Password" type="password" />
       </div>
 
       <div class="forms-page__field forms-page__field--half">
-        <base-checkbox
-          v-model="agreement"
-          name="Agreement"
-          :error="agreementError"
-        >
+        <base-checkbox v-model="agreement" name="Agreement" :error="agreementError">
           Accept it please
         </base-checkbox>
       </div>
 
       <div class="forms-page__field forms-page__field--half">
-        <base-checkbox
-          v-model="kidney"
-          name="Agreement"
-          :error="kidneyError"
-        >
+        <base-checkbox v-model="kidney" name="Agreement" :error="kidneyError">
           Kidney agreement
         </base-checkbox>
       </div>
@@ -44,7 +27,6 @@
           :error="genderError"
           v-model="gender"
           mode="horizontal"
-
         />
       </div>
 
@@ -79,7 +61,6 @@ import BaseInput from '@/components/Base/BaseInput/BaseInput.vue';
 import BaseButton from '@/components/Base/BaseButton/BaseButton.vue';
 import BaseCheckbox from '@/components/Base/BaseCheckbox/BaseCheckbox.vue';
 import BaseRadioGroup from '@/components/Base/BaseRadioGroup/BaseRadioGroup.vue';
-import BaseImage from '@/components/Base/BaseImage/BaseImage.vue';
 import BaseSelect from '@/components/Base/BaseSelect/BaseSelect.vue';
 
 export default defineComponent({
@@ -88,7 +69,6 @@ export default defineComponent({
     BaseButton,
     BaseCheckbox,
     BaseRadioGroup,
-    BaseImage,
     BaseSelect,
   },
   setup() {
@@ -146,13 +126,12 @@ export default defineComponent({
     });
 
     const loading = ref(false);
-    const makeFakeRequest = () => {
-      return new Promise((resolve) => {
+    const makeFakeRequest = () =>
+      new Promise((resolve) => {
         setTimeout(() => {
           resolve(true);
         }, 3000);
       });
-    };
 
     const onSubmit = handleSubmit(async (payload) => {
       loading.value = true;

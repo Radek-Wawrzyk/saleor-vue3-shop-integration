@@ -1,17 +1,9 @@
 <template>
   <div
     class="base-checkbox"
-    :class="[
-      error ? 'base-checkbox--error' : false,
-      disabled ? 'base-checkbox--disabled': false,
-    ]"
+    :class="[error ? 'base-checkbox--error' : false, disabled ? 'base-checkbox--disabled' : false]"
   >
-    <label
-      :for="id"
-      :title="name"
-      :aria-label="name"
-      class="base-checkbox__label"
-    >
+    <label :for="id" :title="name" :aria-label="name" class="base-checkbox__label">
       <input
         :checked="modelValue"
         :value="modelValue"
@@ -50,11 +42,7 @@
     </label>
 
     <transition name="fade">
-      <div
-        class="base-checkbox__error"
-        aria-label="error"
-        v-if="error"
-      >
+      <div class="base-checkbox__error" aria-label="error" v-if="error">
         {{ error }}
       </div>
     </transition>
@@ -72,22 +60,22 @@ export default defineComponent({
     error: {
       type: String as PropType<string>,
       required: false,
-      default: () => (null),
+      default: () => null,
     },
     label: {
       type: String as PropType<string>,
       required: false,
-      default: () => (null),
+      default: () => null,
     },
     id: {
       type: String as PropType<string>,
       required: false,
-      default: () => (uuid()),
+      default: () => uuid(),
     },
     name: {
       type: String as PropType<string>,
       required: false,
-      default: () => (''),
+      default: () => '',
     },
     modelValue: {
       type: Boolean as PropType<boolean>,
@@ -97,7 +85,7 @@ export default defineComponent({
     disabled: {
       type: Boolean as PropType<boolean>,
       required: false,
-      default: () => (false),
+      default: () => false,
     },
   },
 });
