@@ -27,6 +27,12 @@ declare interface ProductPricing {
       gross: ProductPrice,
     }
   }
+  priceRangeUndiscounted: {
+    [key: string]: {
+      net: ProductPrice,
+      gross: ProductPrice,
+    }
+  }
   priceRange: {
     [key: string]: {
       net: ProductPrice,

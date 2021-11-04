@@ -39,6 +39,14 @@ const getSingleProduct = gql`
             currency
           }
         }
+        priceRangeUndiscounted {
+          start {
+            gross {
+              amount
+              currency
+            }
+          }
+        }
         priceRange {
           start {
             net {

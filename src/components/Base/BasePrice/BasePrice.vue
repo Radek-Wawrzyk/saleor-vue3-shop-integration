@@ -1,10 +1,29 @@
 <template>
   <div class="base-price">
-    <span class="base-price__regular">
-      {{ price }}
+    <span
+      class="base-price__regular base-price__regular--new"
+      v-if="onSale && discountPrice && discountPrice.length"
+    >
+      {{ discountPrice }}
     </span>
+
+    <span
+      class="base-price__regular"
+      :class="[
+        onSale ? 'base-price__regular--old' : null,
+      ]"
+    >
+      {{ regularPrice }}
+    </span>
+
+    <sale
+      v-if="onSale && salePercentage"
+      class="base-price__discount"
+    >
+      {{ salePercentage }}
+    </sale>
   </div>
-</template>
+</template>s
 
 <script lang="ts">
 import { ProductPricing } from '@/types/Product';
@@ -21,12 +40,29 @@ export default defineComponent({
   },
   setup(props) {
     const onSale = computed(() => props.price.onSale);
-    const price = computed(() => formatPrice(props.price.priceRange.start.net.amount, props.price.priceRange.start.net.currency));
+    const regularPrice = computed(() => formatPrice(props.price.priceRangeUndiscounted.start.gross.amount, props.price.priceRangeUndiscounted.start.gross.currency));
+    const regularRawPrice = computed(() => props.price.priceRange.start.gross.amount);
+    const discountRawPrice = computed(() => props.price.priceRangeUndiscounted.start.gross.amount);
+    const discountPrice = computed(() => formatPrice(props.price.priceRange.start.gross.amount, props.price.priceRange.start.gross.currency));
+    const salePercentage = computed(() => {
+      if (onSale) {
+        const percentage = 100 - ((Math.round(discountRawPrice.value * 10) - Math.round(regularRawPrice.value * 10))) * 10;
+        return `${percentage}% Off`;
+      }
+
+      return null;
+    });
 
     return {
       onSale,
-      price,
+      regularPrice,
+      regularRawPrice,
+      discountRawPrice,
+      discountPrice,
+      salePercentage,
     };
   }
 });
 </script>
+
+<style lang="scss" src="./BasePrice.scss" />

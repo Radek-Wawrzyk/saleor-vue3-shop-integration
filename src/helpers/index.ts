@@ -3,8 +3,22 @@ import { ProductDescriptionBlock, ProductDescriptionJSON } from '@/types/Product
 const uuid = ():string => (Math.random().toString(16).slice(2));
 
 const formatPrice = (price:number, currency:string = '') => {
-  return `${price} ${currency}`;
+  return `${getCurrencySymbol(currency)}${price}`;
 };
+
+const getCurrencySymbol = (currency: string) => {
+  switch (currency) {
+    case 'USD': {
+      return '$';
+    }
+    case 'PLN': {
+      return 'zł';
+    }
+    default: {
+      return '$';
+    }
+  }
+}
 
 const getHTML = (payload: string): string => {
   const rawData = <ProductDescriptionJSON>JSON.parse(payload);

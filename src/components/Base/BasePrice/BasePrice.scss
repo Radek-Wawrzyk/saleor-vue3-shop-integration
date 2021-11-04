@@ -1,0 +1,26 @@
+.base-price {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &__regular {
+    font-weight: 500;
+
+    &--old {
+      text-decoration: line-through;
+      color: $text-color--accent;
+      font-weight: 400;
+    }
+
+    &--new {
+      margin: 0 0.35rem 0 0;
+      font-weight: 500;
+    }
+  }
+
+  &__discount {
+    width: 100%;
+    color: $success;
+  }
+}
