@@ -1,19 +1,23 @@
 <template>
   <div class="product-details">
+    <span class="product-details__label" v-if="!!productLabel">
+      {{ productLabel }}
+    </span>
+
     <h1 class="product-details__name">
       {{ productName }}
     </h1>
 
-    <!-- <span class="product-details__sub-header" v-if="!!productSubHeader">
-      {{ productSubHeader }}
-    </span> -->
+    <span class="product-details__sub-header" v-if="!!productSubTitle">
+      {{ productSubTitle }}
+    </span>
 
-    <!-- <base-price
+    <base-price
       :price="productPrice"
       class="product-details__price"
     />
 
-    <product-variants
+    <!-- <product-variants
       class="product-details__variants"
       :variants="productVariants"
     /> -->
@@ -28,8 +32,8 @@
 
     <div
       class="product-details__description"
-      v-html="productDescription"
-      v-if="productDescription && productDescription.length"
+      v-html="descriptionHTML"
+      v-if="descriptionHTML && descriptionHTML.length"
     />
 
     <p
@@ -42,15 +46,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { computed, defineComponent, PropType } from 'vue';
 import { ProductPrice, ProductVariant } from '@/types/Product';
+import { getHTML } from '@/helpers/index';
 
 import BaseButton from '@/components/Base/BaseButton/BaseButton.vue';
-// import BasePrice from '@/components/Base/BasePrice/BasePrice.vue';
+import BasePrice from '@/components/Base/BasePrice/BasePrice.vue';
 // import ProductVariants from '@/components/Product/ProductVariants/ProductVariants.vue';
 
 export default defineComponent({
-  components: { BaseButton },
+  components: { BaseButton, BasePrice },
   name: 'ProductDetails',
   props: {
     productName: {
@@ -71,8 +76,21 @@ export default defineComponent({
       required: false,
       default: () => (''),
     },
+    productSubTitle: {
+      type: String as PropType<string>,
+      required: false,
+      default: () => (''),
+    },
+    productLabel: {
+      type: String as PropType<string>,
+      required: false,
+      default: () => (''),
+    },
   },
-  setup() {
+  setup(props) {
+    const rawDescription = computed(() => JSON.parse(props.productDescription));
+
+    const descriptionHTML = computed(() => getHTML(props.productDescription));
     const addToBag = () => {
       // ToDo - Create logic for bag
       console.log('AddToBag() mocked');
@@ -80,6 +98,8 @@ export default defineComponent({
 
     return {
       addToBag,
+      descriptionHTML,
+      rawDescription,
     };
   },
 });

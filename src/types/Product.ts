@@ -11,29 +11,52 @@ declare interface ProductVariant {
   id: string,
   name: string,
   images: ProductImage[],
+  metadata: ProductMetaData[],
 }
 
 declare interface ProductPrice {
   amount: number,
+  currency: string,
 }
 
 declare interface ProductPricing {
   onSale: boolean,
-  priceRange: {
-    start: {
+  discount?: {
+    [key: string]: {
       net: ProductPrice,
       gross: ProductPrice,
-    },
-    stop: {
+    }
+  }
+  priceRange: {
+    [key: string]: {
       net: ProductPrice,
       gross: ProductPrice,
     }
   }
 }
 
+declare interface ProductMetaData {
+  key: string,
+  value: string,
+};
+
+declare interface ProductDescriptionBlock {
+  type: string,
+  data: {
+    text?: string,
+    style?: string,
+    items?: string[],
+  }
+}
+
+declare interface ProductDescriptionJSON {
+  blocks: ProductDescriptionBlock[],
+  time?: number,
+  version?: string,
+};
+
 declare interface Product {
   description: string,
-  descriptionJson: string,
   isAvailable: boolean,
   defaultVariant: {
     id: string,
@@ -43,12 +66,17 @@ declare interface Product {
   name: string,
   id: string,
   images: ProductImage[],
+  metadata: ProductMetaData[],
 }
+
 
 export {
   ProductVariant,
   ProductPricing,
   ProductPrice,
   ProductImage,
+  ProductMetaData,
+  ProductDescriptionJSON,
+  ProductDescriptionBlock,
   Product
 }

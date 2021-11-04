@@ -15,31 +15,53 @@ const getProducts = gql`
 `;
 
 const getSingleProduct = gql`
-  query getSingleProduct ($slug: String) {
-    product(slug: $slug) {
-      description,
-      descriptionJson,
+  query getSingleProduct ($slug: String, $channel: String = "default") {
+    product(slug: $slug, channel: $channel) {
+      description
+      seoDescription
       isAvailable
+      metadata {
+        key,
+        value
+      }
       defaultVariant {
         id
       },
       pricing {
         onSale,
+        discount {
+          net {
+            amount
+            currency
+          }
+          gross {
+            amount
+            currency
+          }
+        }
         priceRange {
           start {
             net {
               amount
+              currency
+            }
+            tax {
+              amount
+              currency
             }
             gross {
               amount
+              currency
             }
           }
           stop {
             net {
               amount
+              currency
             }
             gross {
               amount
+              currency
             }
           }
         }
@@ -47,11 +69,15 @@ const getSingleProduct = gql`
       variants {
         id,
         name
+        metadata {
+          value
+          key
+        }
+        quantityAvailable,
         images {
           url,
           id,
-          alt,
-          sortOrder
+          alt
         }
       }
       name,

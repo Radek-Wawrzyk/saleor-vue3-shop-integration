@@ -1,16 +1,25 @@
 .product-details {
   position: relative;
 
+  &__label {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: $warning;
+  }
+
   &__name {
     font-weight: 500;
     font-size: 1.75rem;
     line-height: 1.2;
     letter-spacing: 0.007em;
+    margin: 0 0 0.25rem 0;
   }
 
   &__sub-header {
     line-height: 1.5;
     font-weight: 400;
+    margin: 0 0 0.25rem 0;
   }
 
   &__add-to-bag {

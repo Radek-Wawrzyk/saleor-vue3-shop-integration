@@ -12,6 +12,8 @@
           :product-description="productDescription"
           :product-price="productPrice"
           :product-variants="productVariants"
+          :product-label="productLabel"
+          :product-sub-title="productSubTitle"
           class="product-page__content-details"
         />
       </section>
@@ -28,6 +30,7 @@ import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { getSingleProduct } from '@/graphql/queries/product';
 import { useQuery, useResult } from '@vue/apollo-composable';
+import { ProductMetaData } from '@/types/Product';
 
 import ProductGallery from '@/components/Product/ProductGallery/ProductGallery.vue';
 import ProductDetails from '@/components/Product/ProductDetails/ProductDetails.vue';
@@ -42,13 +45,15 @@ export default defineComponent({
     const { result, loading, error } = useQuery(getSingleProduct, { slug });
     const product = useResult(result, null);
 
-    const productImages = computed(() => product.value.images);
-    const productName = computed(() => product.value.name);
-    const productDescription = computed(() => product.value.description);
-    const productVariants = computed(() => product.value.variants);
-    const defaultVariant = computed(() => product.value.defaultVariant);
-    const productId = computed(() => product.value.id);
-    const productPrice = computed(() => product.value.pricing);
+    const productImages = computed(() => product?.value?.images);
+    const productName = computed(() => product?.value?.name);
+    const productDescription = computed(() => product?.value?.description);
+    const productVariants = computed(() => product?.value?.variants);
+    const defaultVariant = computed(() => product?.value?.defaultVariant);
+    const productId = computed(() => product?.value?.id);
+    const productPrice = computed(() => product?.value?.pricing);
+    const productLabel = computed(() => product?.value?.metadata?.find((meta: ProductMetaData) => meta.key === 'headLabel')?.value);
+    const productSubTitle = computed(() => product?.value?.metadata?.find((meta: ProductMetaData) => meta.key === 'subTitle')?.value);
 
     return {
       route,
@@ -62,6 +67,8 @@ export default defineComponent({
       productVariants,
       productId,
       productPrice,
+      productLabel,
+      productSubTitle,
       slug,
       defaultVariant,
     };
