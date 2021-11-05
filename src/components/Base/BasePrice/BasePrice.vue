@@ -20,7 +20,7 @@
       v-if="onSale && salePercentage"
       class="base-price__discount"
     >
-      {{ salePercentage }}
+      {{ salePercentageMessage }}
     </sale>
   </div>
 </template>s
@@ -44,9 +44,9 @@ export default defineComponent({
     const regularRawPrice = computed(() => props.price.priceRange.start.gross.amount);
     const discountRawPrice = computed(() => props.price.priceRangeUndiscounted.start.gross.amount);
     const discountPrice = computed(() => formatPrice(props.price.priceRange.start.gross.amount, props.price.priceRange.start.gross.currency));
-    const salePercentage = computed(() => {
+    const salePercentageMessage = computed(() => {
       if (onSale) {
-        const percentage = 100 - ((Math.round(discountRawPrice.value * 10) - Math.round(regularRawPrice.value * 10))) * 10;
+        const percentage = 100 - ((regularRawPrice.value * 100) / discountRawPrice.value);
         return `${percentage}% Off`;
       }
 
@@ -59,7 +59,7 @@ export default defineComponent({
       regularRawPrice,
       discountRawPrice,
       discountPrice,
-      salePercentage,
+      salePercentageMessage,
     };
   }
 });
