@@ -71,10 +71,10 @@ export const megaMenu = [
         id: 1,
         name: 'Polecane',
         subcategory: [
-          { name: '1', path: '/member-day' },
-          { name: '1', path: '/' },
-          { name: '1', path: '/bestseeller' },
-          { name: '1', path: '/premieres-calendar' },
+          { name: 'Buty', path: '/member-day' },
+          { name: 'Ubrania', path: '/' },
+          { name: 'Sprzęt', path: '/bestseeller' },
+          { name: 'Przeglądaj wszystkie nowości dla mężczyzn', path: '/premieres-calendar' },
         ],
       },
       {

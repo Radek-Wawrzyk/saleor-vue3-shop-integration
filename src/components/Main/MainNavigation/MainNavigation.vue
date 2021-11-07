@@ -46,7 +46,7 @@
           </ul>
         </div>
 
-        <ul class="main-navigation-bottom__menu">
+        <!-- <ul class="main-navigation-bottom__menu">
           <li
             class="main-navigation-bottom__menu-item"
             v-for="category in subMenu"
@@ -54,7 +54,7 @@
           >
             {{ category.name }}
           </li>
-        </ul>
+        </ul> -->
       </nav>
     </transition>
   </nav>

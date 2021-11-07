@@ -22,17 +22,37 @@
       text-decoration: none;
       color: $primary;
       outline: none;
+      border-bottom: 1px solid transparent;
+      &:hover {
+        border-color: $primary;
+      }
     }
   }
 
   &-bottom {
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
+
     display: flex;
     align-items: flex-start;
+	padding:16px 40px 40px;
 
     &__menu {
-      padding: 0 1rem;
+      padding: 16px 8px 0;
+
+      &-heading {
+        color: $primary;
+        font-weight: 500;
+        font-size: 16px;
+        margin: 14px 0;
+		cursor: pointer;
+      }
+    }
+    &__menu-item {
+      margin-bottom: 6px;
+      color: $text-color--accent;
+      cursor: pointer;
+      &:hover {
+        color: $text-color;
+      }
     }
   }
 }
