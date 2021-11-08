@@ -110,14 +110,14 @@ export default defineComponent({
     error: {
       type: String as PropType<string>,
       required: false,
-      default: () => (null),
+      default: () => (''),
     },
   },
   setup(props, { emit }) {
     const isActive = ref<boolean>(false);
     const selectRef = ref<HTMLDivElement>();
     const selectText = computed(() => {
-      const selected = props.options.find((option) => option.value === props.modelValue);
+      const selected = props.options.find((option:SelectOption) => option.value === props.modelValue);
       return selected ? selected.label : props.label;
     });
 

@@ -11,6 +11,7 @@ declare interface ProductVariant {
   id: string,
   name: string,
   images: ProductImage[],
+  quantityAvailable: number,
   metadata: ProductMetaData[],
 }
 

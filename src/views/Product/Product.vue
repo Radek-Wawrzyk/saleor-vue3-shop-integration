@@ -14,6 +14,8 @@
           :product-variants="productVariants"
           :product-label="productLabel"
           :product-sub-title="productSubTitle"
+          :product-default-variant-id="productDefaultVariantId"
+          :product-default-variant="productDefaultVariant"
           class="product-page__content-details"
         />
       </section>
@@ -30,7 +32,7 @@ import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { getSingleProduct } from '@/graphql/queries/product';
 import { useQuery, useResult } from '@vue/apollo-composable';
-import { ProductMetaData } from '@/types/Product';
+import { ProductMetaData, ProductVariant } from '@/types/Product';
 
 import ProductGallery from '@/components/Product/ProductGallery/ProductGallery.vue';
 import ProductDetails from '@/components/Product/ProductDetails/ProductDetails.vue';
@@ -54,6 +56,8 @@ export default defineComponent({
     const productPrice = computed(() => product?.value?.pricing);
     const productLabel = computed(() => product?.value?.metadata?.find((meta: ProductMetaData) => meta.key === 'headLabel')?.value);
     const productSubTitle = computed(() => product?.value?.metadata?.find((meta: ProductMetaData) => meta.key === 'subTitle')?.value);
+    const productDefaultVariantId = computed(() => product?.value.defaultVariant.id);
+    const productDefaultVariant = computed(() => product?.value?.variants?.find((variant: ProductVariant) => variant.id === productDefaultVariantId.value));
 
     return {
       route,
@@ -69,6 +73,8 @@ export default defineComponent({
       productPrice,
       productLabel,
       productSubTitle,
+      productDefaultVariantId,
+      productDefaultVariant,
       slug,
       defaultVariant,
     };

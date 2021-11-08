@@ -5,16 +5,18 @@ $primary:  #111111;
 $text-color: #111111;
 $text-color--accent: #757575;
 $text-color--reversed: #FFFFFF;
+$text-color--disabled: #dddddd;
 
 // Layout
 $background-color:#FFFFFF;
-$background-color--darker:#F5F5F5;
-$border-color: rgb(229, 229, 229);
+$background-color--medium: #f7f7f7;
+$background-color--darker:#f5f5f5;
+$border-color: #e5e5e5;
 
 // UI events
-$success: rgb(65, 161, 57);
-$warning: rgb(250, 84, 0);
-$error: rgb(212, 63, 33);
+$success: #41a139;
+$warning: #fa5400;
+$error: #d43f21;
 
 // Timings
 $time: 0.2s;

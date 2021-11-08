@@ -17,10 +17,14 @@
       class="product-details__price"
     />
 
-    <!-- <product-variants
+    <product-variants
       class="product-details__variants"
       :variants="productVariants"
-    /> -->
+      :product-default-variant-id="productDefaultVariantId"
+      :product-default-variant="productDefaultVariant"
+      @select-variant="selectVariant($event)"
+      v-if="productVariants && productVariants.length"
+    />
 
     <base-button
       class="product-details__add-to-bag"
@@ -46,16 +50,16 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import { ProductPrice, ProductVariant } from '@/types/Product';
 import { getHTML } from '@/helpers/index';
 
 import BaseButton from '@/components/Base/BaseButton/BaseButton.vue';
 import BasePrice from '@/components/Base/BasePrice/BasePrice.vue';
-// import ProductVariants from '@/components/Product/ProductVariants/ProductVariants.vue';
+import ProductVariants from '@/components/Product/ProductVariants/ProductVariants.vue';
 
 export default defineComponent({
-  components: { BaseButton, BasePrice },
+  components: { BaseButton, BasePrice, ProductVariants },
   name: 'ProductDetails',
   props: {
     productName: {
@@ -74,32 +78,46 @@ export default defineComponent({
     productVariants: {
       type: Array as PropType<ProductVariant[]>,
       required: false,
-      default: () => (''),
+      default: () => ([]),
     },
     productSubTitle: {
-      type: String as PropType<string>,
+      type: String as PropType<string | undefined>,
       required: false,
       default: () => (''),
     },
     productLabel: {
-      type: String as PropType<string>,
+      type: String as PropType<string | undefined>,
       required: false,
       default: () => (''),
     },
+    productDefaultVariant: {
+      type: Object as PropType<ProductVariant>,
+      required: true,
+    },
+    productDefaultVariantId: {
+      type: String as PropType<string>,
+      required: true,
+    },
   },
   setup(props) {
+    const selectedVariant = ref(props.productDefaultVariant) as any;
     const rawDescription = computed(() => JSON.parse(props.productDescription));
-
     const descriptionHTML = computed(() => getHTML(props.productDescription));
+
+    const selectVariant = (variant: ProductVariant) => {
+      selectedVariant.value = variant;
+    };
+
     const addToBag = () => {
       // ToDo - Create logic for bag
-      console.log('AddToBag() mocked');
+      console.log('AddToBag() mocked', { qty: 1, variantId: selectedVariant?.value?.id });
     };
 
     return {
       addToBag,
       descriptionHTML,
       rawDescription,
+      selectVariant,
     };
   },
 });

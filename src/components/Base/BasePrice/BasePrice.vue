@@ -16,12 +16,12 @@
       {{ regularPrice }}
     </span>
 
-    <sale
-      v-if="onSale && salePercentage"
+    <span
+      v-if="onSale && salePercentageMessage"
       class="base-price__discount"
     >
       {{ salePercentageMessage }}
-    </sale>
+    </span>
   </div>
 </template>s
 
